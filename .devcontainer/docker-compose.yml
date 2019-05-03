@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+  # Redis, unused right now, but there
+  redis:
+    image: redis
+    ports:
+      - "16379:6379"
+
+  # Basic MySQL setup
+  mysql:
+    image: mysql:5.7.18
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    # Bind to 13306 and not 3306 to try and avoid conflicts
+    ports:
+      - "13306:3306"
+    # Saves into the tmp folder to persist between runs
+    volumes:
+      - ../tmp/db:/var/lib/mysql
+  
+  web:
+    # Because we're in a folder, we need to set the context and such to run
+    build:
+      context: ../
+      dockerfile: .devcontainer/Dockerfile
+    ports:
+      - "3000:3000"
+    # Mount in the app so when we make changes they're synced  
+    volumes:
+      - ../:/app
+      - logvolume01:/var/log
+    depends_on:
+      - mysql
+      - redis
+    links:
+      - mysql
+      - redis
+
+volumes:
+  logvolume01: {}

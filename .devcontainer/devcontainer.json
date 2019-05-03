@@ -1,0 +1,8 @@
+{
+  "name": "dcompose",
+  "dockerComposeFile": ".devcontainer/docker-compose.yml",
+  "service": "web",
+  "workspaceFolder": "/app",
+  "shutdownAction": "stopCompose",
+  "appPort": [3000, 13306, 16379]
+}
