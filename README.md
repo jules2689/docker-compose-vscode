@@ -30,3 +30,5 @@ Open up the folder, then open the Docker extension. Right click on the web conta
 ### 5) Open https://localhost:3000
 
 This might take 20-30 seconds to boot.
+
+![VSCode and Docker Compose Running](https://user-images.githubusercontent.com/3074765/57165728-f224e580-6dc5-11e9-8489-1ae602dc7196.png)
