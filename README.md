@@ -32,3 +32,18 @@ Open up the folder, then open the Docker extension. Right click on the web conta
 This might take 20-30 seconds to boot.
 
 ![VSCode and Docker Compose Running](https://user-images.githubusercontent.com/3074765/57165728-f224e580-6dc5-11e9-8489-1ae602dc7196.png)
+
+## Protip
+
+Add this snippet to your ~/.bash_profile (or zsh, etc) to automatically enable a `COMPOSE_FILE` variable, so you don't need to specify the `-f ...` option on the `docker-compose` commands.
+
+```bash
+docker_compose() {
+  if [[ -f ".devcontainer/docker-compose.yml" ]] && [[ ! -f "docker-compose.yml" ]]; then
+    export COMPOSE_FILE=".devcontainer/docker-compose.yml"
+  else
+    unset COMPOSE_FILE
+  fi
+}
+trap 'docker_compose' DEBUG
+```
